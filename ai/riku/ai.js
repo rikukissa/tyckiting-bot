@@ -33,17 +33,17 @@ module.exports = function Ai() {
     .forEach(function(bot, i) {
       var x, y;
 
-      // if(shouldMoveEvent && shouldMoveEvent.botId === bot.botId) {
-      //   var maxMove = config.move;
-      //   var x = bot.x + maxMove - maxMove * (Math.floor(Math.random() * maxMove));
-      //   var y = bot.y + maxMove - maxMove * (Math.floor(Math.random() * maxMove));
+      if(shouldMoveEvent && shouldMoveEvent.botId === bot.botId) {
+        var maxMove = config.move;
+        var x = bot.x + maxMove - maxMove * (Math.floor(Math.random() * maxMove));
+        var y = bot.y + maxMove - maxMove * (Math.floor(Math.random() * maxMove));
 
-      //   return bot.move(x, y);
-      // }
+        return bot.move(x, y);
+      }
 
-      // if(enemyDetectedEvent) {
-      //   return bot.cannon(enemyDetectedEvent.pos.x, enemyDetectedEvent.pos.y);
-      // }
+      if(enemyDetectedEvent) {
+        return bot.cannon(enemyDetectedEvent.pos.x, enemyDetectedEvent.pos.y);
+      }
 
       if(i === 0) {
         y = -radius + (roundId % radius * 2);
@@ -63,11 +63,11 @@ module.exports = function Ai() {
       }
     });
 
-    // _.each(events, function(event) {
-    //   if (event.event === "noaction") {
-    //     console.log("Bot did not respond in required time", event.data);
-    //   }
-    // });
+    _.each(events, function(event) {
+      if (event.event === "noaction") {
+        console.log("Bot did not respond in required time", event.data);
+      }
+    });
   }
 
   function randInt(min, max) {
